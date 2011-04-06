@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Matchy</string>
+
+    <string-array name="questions">
+      <item>Birth date</item>
+      <item>Gender</item>
+      <item>School type</item>
+      <item>Weight</item>
+      <item>Height</item>
+      <item>Birth weight</item>
+      <item>How many hours the last week did your child watch TV?</item>
+      <item>How many hours the last week have your child use Internet?</item>
+      <item>During the last week, how many times has your child tried to make you buy certain branded products?</item>
+      <item>During the last week, how many times has your child tried to make you buy certain branded food products?</item>
+      <item>Does your child eat breakfast every day?</item>
+      <item>How many portions of fruit and vegetables does your child consume per day?</item>
+      <item>How many times a day does your child eat Crips/snacks?</item>
+      <item>How many times a day does your child eat Biscuits?</item>
+      <item>How many times a day does your child eat Sweets?</item>
+      <item>How many times a day does your child eat Fried food?</item>
+      <item>How many times a day does your child eat Soft drinks?</item>
+      <item>Does anyone in the household smoke?</item>
+      <item>Income</item>
+      <item>Land ownership</item>
+    </string-array>
+    
+    <string-array name="products">
+      <item>parle</item>
+      <item>tiger</item>
+      <item>bournvita</item>
+      <item>cocacola</item>
+      <item>pepsi</item>
+      <item>haldiram</item>
+      <item>lays</item>
+      <item>amul</item>
+      <item>kitkat</item>
+      <item>dominos</item>
+      <item>gems</item>
+      <item>kfc</item>
+      <item>maggi</item>
+      <item>mcdonalds</item>
+      <item>mentos</item>
+      <item>maaza</item>
+      <item>rasna</item>
+    </string-array>
+    
+    <string-array name="categories">
+      <item>chocolate</item>
+      <item>smarties</item>
+      <item>biscuits</item>
+      <item>coke</item>
+      <item>fanta</item>
+      <item>chips</item>
+      <item>noodles</item>
+      <item>burguer</item>
+      <item>pizza</item>
+      <item>chicken</item>
+      <item>mintcandy</item>
+      <item>chocolatedrink</item>
+    </string-array>
+    
+    <string-array name="trainingCategories">
+      <item>books</item>
+      <item>fruits</item>
+      <item>animals</item>
+      <item>transportation</item>
+    </string-array>
+    
+    <string-array name="trainingCards">
+      <item>apple</item>
+      <item>motorbike</item>
+      <item>monkey</item>
+      <item>notebook</item>
+      <item>banana</item>
+      <item>ship</item>
+    </string-array>
+</resources>
