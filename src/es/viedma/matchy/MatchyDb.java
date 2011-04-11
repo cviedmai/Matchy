@@ -6,6 +6,7 @@ import java.util.TimeZone;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,7 +16,7 @@ import android.util.Log;
 public class MatchyDb {
 		
 	private static final String DATABASE_NAME = "matchy.db";
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 4;
 
 	private static final String CARDS_TABLE = "card";
 	public static final String KEY_CARD_ID = "card_id";
@@ -25,8 +26,11 @@ public class MatchyDb {
 	public static final String KEY_CREATED_AT = "created_at";
 	public static final String KIDS_TABLE = "kids";
 	public static final String QUESTIONS_TABLE = "questions";
-	public static final String KEY_QUESTION = "question";
-	public static final String KEY_QUESTION_ID = "question_id";
+//	public static final String KEY_QUESTION = "question";
+//	public static final String KEY_QUESTION_ID = "question_id";
+	public static final String PREFERENCES_TABLE = "preferences";
+	public static final String KEY_PREFERENCE = "preference";
+	public static final String KEY_PREFERENCE_ID = "preference_id";
 	public static MatchyDb instance;
 
 	private SQLiteDatabase db;
@@ -59,13 +63,20 @@ public class MatchyDb {
 		int lastId;
 		this.open();
 		Cursor cur = db.query("SQLITE_SEQUENCE", null, "name == 'kids'", null, null, null, null);
-		cur.moveToFirst();
-		String res = cur.getString(1);
-	    lastId = Integer.parseInt(res);
-	    this.close();
-		return lastId;
+		try {
+			cur.moveToFirst();
+			String res = cur.getString(1);
+		    lastId = Integer.parseInt(res);
+		}
+		catch (CursorIndexOutOfBoundsException e) {
+			// There is no kid yet
+			lastId = 0;
+		}
+		this.close();
+		return lastId + 1;
 	}
 	
+	// Insert the answer of a card into the database
 	public long insertCard (String card, String answer){
 		if (lastKidId == null) throw new RuntimeException("There is no kid selected!");
 		this.open();	
@@ -80,18 +91,32 @@ public class MatchyDb {
 		return inserts;
 	}
 	
-	public long insertQuestion (String question, String answer){
+	// Insert the answer of a preference question into the database
+	public long insertPreference (String preference){
 		if (lastKidId == null) throw new RuntimeException("There is no kid selected!");
-		this.open();
-		ContentValues newQuestion = new ContentValues();
-		newQuestion.put(KEY_KID_ID, lastKidId);
-		newQuestion.put(KEY_QUESTION, question);
-		newQuestion.put(KEY_ANSWER, answer);
-		newQuestion.put(KEY_CREATED_AT, dateFormat.format(System.currentTimeMillis()));
-		long insert = db.insert(QUESTIONS_TABLE, null, newQuestion);
+		this.open();	
+		ContentValues newPreference = new ContentValues();
+		
+		newPreference.put(KEY_KID_ID, lastKidId);
+		newPreference.put(KEY_PREFERENCE, preference);
+		newPreference.put(KEY_CREATED_AT, dateFormat.format(System.currentTimeMillis()));
+		long inserts = db.insert(PREFERENCES_TABLE, null, newPreference);
 		this.close();
-		return insert;
+		return inserts;
 	}
+	
+//	public long insertQuestion (String question, String answer){
+//		if (lastKidId == null) throw new RuntimeException("There is no kid selected!");
+//		this.open();
+//		ContentValues newQuestion = new ContentValues();
+//		newQuestion.put(KEY_KID_ID, lastKidId);
+//		newQuestion.put(KEY_QUESTION, question);
+//		newQuestion.put(KEY_ANSWER, answer);
+//		newQuestion.put(KEY_CREATED_AT, dateFormat.format(System.currentTimeMillis()));
+//		long insert = db.insert(QUESTIONS_TABLE, null, newQuestion);
+//		this.close();
+//		return insert;
+//	}
 	
 	public long createNewKid (){
 		this.open();
@@ -116,13 +141,19 @@ public class MatchyDb {
 			KEY_CARD + " text not null, " + 
 			KEY_ANSWER + " text not null, " +
 			KEY_CREATED_AT + " text);";
-		
-		private static final String QUESTIONS_CREATE = "create table " + QUESTIONS_TABLE + " (" + 
-			KEY_QUESTION_ID + " integer primary key autoincrement, " +
+
+		private static final String PREFERENCES_CREATE = "create table " + PREFERENCES_TABLE + " (" + 
+			KEY_PREFERENCE_ID + " integer primary key autoincrement, " +
 			KEY_KID_ID + " integer, " +
-			KEY_QUESTION + " text not null, " + 
-			KEY_ANSWER + " text not null, " +
+			KEY_PREFERENCE + " text not null, " + 
 			KEY_CREATED_AT + " text);";
+		
+//		private static final String QUESTIONS_CREATE = "create table " + QUESTIONS_TABLE + " (" + 
+//			KEY_QUESTION_ID + " integer primary key autoincrement, " +
+//			KEY_KID_ID + " integer, " +
+//			KEY_QUESTION + " text not null, " + 
+//			KEY_ANSWER + " text not null, " +
+//			KEY_CREATED_AT + " text);";
 		
 		public MatchyDBOpenHelper (Context context, String name, CursorFactory factory, int version) {
 			super(context, name, factory, version);
@@ -132,7 +163,8 @@ public class MatchyDb {
 		public void onCreate(SQLiteDatabase _db) {
 			_db.execSQL(KIDS_CREATE);
 			_db.execSQL(CARDS_CREATE);
-			_db.execSQL(QUESTIONS_CREATE);
+			_db.execSQL(PREFERENCES_CREATE);
+//			_db.execSQL(QUESTIONS_CREATE);
 		}
 
 		@Override
@@ -140,6 +172,7 @@ public class MatchyDb {
 			Log.w("MatchyDBAdapter", "Destructive upgrade from version " + _oldVersion + " to " + _newVersion);
 			_db.execSQL("DROP TABLE IF EXISTS " + KIDS_TABLE);
 			_db.execSQL("DROP TABLE IF EXISTS " + CARDS_TABLE);
+			_db.execSQL("DROP TABLE IF EXISTS " + PREFERENCES_TABLE);
 			_db.execSQL("DROP TABLE IF EXISTS " + QUESTIONS_TABLE);
 			onCreate(_db);			
 		}

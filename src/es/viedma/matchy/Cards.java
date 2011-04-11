@@ -32,7 +32,8 @@ public class Cards extends Activity {
 		
 		else {
 			Intent myIntent = new Intent();
-			myIntent.setClassName("es.viedma.matchy", "es.viedma.matchy.GoodWork");
+			myIntent.setClassName("es.viedma.matchy", "es.viedma.matchy.Preference");
+			//myIntent.setClassName("es.viedma.matchy", "es.viedma.matchy.GoodWork");
 			startActivity(myIntent);
 		}						
 	}

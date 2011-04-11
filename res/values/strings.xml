@@ -26,23 +26,23 @@
     </string-array>
     
     <string-array name="products">
+      <item>maggi</item>
       <item>parle</item>
-      <item>tiger</item>
+      <item>mentos</item>
       <item>bournvita</item>
-      <item>cocacola</item>
+      <item>maaza</item>
       <item>pepsi</item>
-      <item>haldiram</item>
-      <item>lays</item>
-      <item>amul</item>
       <item>kitkat</item>
+      <item>lays</item>
+      <item>amul</item>      
+      <item>rasna</item>
       <item>dominos</item>
+      <item>haldiram</item>
       <item>gems</item>
       <item>kfc</item>
-      <item>maggi</item>
       <item>mcdonalds</item>
-      <item>mentos</item>
-      <item>maaza</item>
-      <item>rasna</item>
+      <item>tiger</item>
+      <item>cocacola</item>      
     </string-array>
     
     <string-array name="categories">
@@ -74,5 +74,31 @@
       <item>notebook</item>
       <item>banana</item>
       <item>ship</item>
+    </string-array>
+    
+    <string-array name="preferences1">
+      <item>cola</item>
+      <item>chips</item>
+      <item>candy</item>
+      <item>chocolate</item>
+      <item>biscuits</item>
+      <item>pizza</item>
+      <item>frenchfries</item>
+      <item>burguer</item>
+      <item>fastfood</item>
+      <item>chocolatedrink</item>      
+    </string-array>
+    
+    <string-array name="preferences2">
+      <item>juice</item>
+      <item>nuts</item>
+      <item>mango</item>
+      <item>cerealbar</item>
+      <item>fruit</item>
+      <item>korma</item>
+      <item>rice</item>
+      <item>tandoori</item>
+      <item>homemade</item>
+      <item>milk</item>      
     </string-array>
 </resources>

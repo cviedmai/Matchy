@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  
+  <TableLayout 
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent">
+  <TableRow
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:gravity="center_horizontal|center">
+         
+        <ImageButton android:id="@+id/preference1"
+            android:src="@drawable/chocolate"
+            android:tag="preference1"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:padding="5dip"
+            android:adjustViewBounds="true"
+            android:onClick="clickHandler" />
+        <ImageButton android:id="@+id/preference2" 
+            android:src="@drawable/smarties"
+            android:tag="preference2"
+            android:scaleType="fitCenter"
+            android:layout_weight="1" 
+            android:padding="5dip"
+            android:adjustViewBounds="true"
+            android:onClick="clickHandler"/>
+            </TableRow>
+  </TableLayout>
+</LinearLayout>

@@ -3,13 +3,21 @@
 			android:id="@+id/LinearLayout01" 
 			android:layout_width="fill_parent" 
 			android:layout_height="fill_parent" 
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:background="@drawable/background_green">
 	
-	<TextView android:text="Matchy" 
+	<TextView android:text="Matchy!" 
 				android:id="@+id/lastInput" 
 				android:layout_width="fill_parent" 
 				android:layout_height="wrap_content"
 				android:textSize="50sp"
+				android:typeface="sans"  
+				android:textStyle="bold"  
+				android:textColor="#ffffff"
+				android:shadowColor="#ffffff"  
+        android:shadowRadius="3"  
+        android:shadowDx="2"  
+        android:shadowDy="2" 
 				android:gravity="center_horizontal|top"></TextView>
 
 <TextView android:text="Next kid ID: " 
@@ -30,6 +38,11 @@
 					android:layout_height="wrap_content"></Button>
     <Button android:text="Training"
           android:id="@+id/training"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"></Button>
+
+    <Button android:text="Export"
+          android:id="@+id/export"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"></Button>
 	</LinearLayout>
